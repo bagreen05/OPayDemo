@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,11 +27,14 @@ public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE = 217;
     private ArrayList<PriceInfo> priceInfos;
     private EditText edit_text;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         edit_text = (EditText) findViewById(R.id.edit_text);
         edit_text.setHintTextColor(Color.parseColor("#aaaaab"));
         GridView gv = (GridView) findViewById(R.id.gv);
@@ -43,6 +47,25 @@ public class MainActivity extends AppCompatActivity {
         priceInfos.add(new PriceInfo("200元","售价:198.00元","19800"));
         priceInfos.add(new PriceInfo("300元","售价:295.00元","29500"));
         priceInfos.add(new PriceInfo("500元","售价:490.00元","49000"));
+
+        findViewById(R.id.open).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,RecyclerTestActivity.class));
+            }
+        });
+        findViewById(R.id.card).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,CardViewTestActivity.class));
+            }
+        });
+        findViewById(R.id.notify).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,NotificationTestActivity.class));
+            }
+        });
         gv.setAdapter(new BaseAdapter() {
             @Override
             public int getCount() {
@@ -102,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         Utils.showLog(TAG,"requestCode = [" + requestCode + "], resultCode = [" + resultCode + "], data = [" + data + "]");
         if (requestCode == REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                new AlertDialog.Builder(MainActivity.this).setTitle("支付成功，话费会立即到账，请稍候！")
+                new AlertDialog.Builder(MainActivity.this).setTitle("支付成功，话费会立即到账，请稍候！"+data.getStringExtra("tn"))
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -110,7 +133,8 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }).create().show();
             } else {
-                new AlertDialog.Builder(MainActivity.this).setTitle("支付异常，请稍候再试！")
+                String msg = data!=null?data.getStringExtra("msg"):"支付已取消";
+                new AlertDialog.Builder(MainActivity.this).setTitle(msg)
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

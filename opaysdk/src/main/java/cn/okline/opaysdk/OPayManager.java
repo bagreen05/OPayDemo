@@ -20,7 +20,7 @@ import android.widget.Toast;
 public class OPayManager {
 
     private static final String PACKAGE_NAME = "com.vboss.okline";
-    private static final String CLS_NAME = "com.vboss.okline.ui.opay.OPaySDKActivity";
+    private static final String CLS_NAME = "com.okline.vboss.assistant.ui.opay.OPaySDKActivity";
     private static final String INTENT = "intent";
     private static final String ORDER_AMOUNT = "orderAmount";
     private static final String ORDER_DESC = "orderDesc";
@@ -50,7 +50,7 @@ public class OPayManager {
         intent.putExtra(MER_NO,signatural);
         intent.putExtra(CARD_ID, "1");
         intent.putExtra(CARD_TYPE, 0);
-        intent.putExtra(SHOW_RESULT_PAGE, true);
+        intent.putExtra(SHOW_RESULT_PAGE, false);
         intent.putExtra(REQUEST_CODE, task.getRequestCode());
         Activity context1 = (Activity) context;
         try {
@@ -58,7 +58,6 @@ public class OPayManager {
         } catch (ActivityNotFoundException e) {
             e.printStackTrace();
             System.out.println(">>>您的手机尚未安装OKLineAPP，请安装之后再试<<<");
-//            Toast.makeText(context1, "您的手机尚未安装OKLineAPP，请安装之后再试", Toast.LENGTH_SHORT).show();
         }
     }
 }

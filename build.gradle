@@ -21,3 +21,48 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+//task ex42 << {
+//    println "ex42 executed!!!"
+//}
+//
+//task ex43 << {
+//    println(tasks.findByPath(':ex42'))
+//    println(tasks.getByPath(":ex42"))
+//
+//    println(tasks.getByName('ex42'))
+//    println(tasks.findByName('ex42'))
+//    println(Integer.toBinaryString(1 << 3))
+//    println(Integer.toBinaryString(1.leftShift(3)))
+//}
+//
+//ex42.description = '这是一个构建的引导任务'
+//
+//class CustomTask extends DefaultTask{
+//
+//    @TaskAction
+//    def doSelf(){
+//        println("task 本身执行doSelf")
+//    }
+//}
+//
+//task myTask(type: CustomTask){
+//    doFirst {
+//        println("task 本身执行doFirst")
+//    }
+//    doLast {
+//        println("task 本身执行doLast")
+//    }
+//    println("task 本身执行定义块内容")
+//    tasks.each {
+//        println(it.getClass().getCanonicalName())
+//    }
+//}
+//
+//myTask.doFirst{
+//    println("task 外加doFirst")
+//}
+//
+//myTask.dependsOn ex42
+//
+//ex42.enabled = false

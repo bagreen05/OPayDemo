@@ -8,6 +8,23 @@
     android:background="#f4f4f4"
     tools:context="cn.okline.opaydemo.MainActivity">
 
+    <include layout="@layout/my_toolbar"/>
+
+    <TextView
+        android:id="@+id/open"
+        android:text="芝麻开门"
+        style="@style/myTextButtonStyle"/>
+
+    <TextView
+        android:id="@+id/card"
+        android:text="卡片视图"
+        style="@style/myTextButtonStyle"/>
+
+    <TextView
+        android:id="@+id/notify"
+        android:text="通知测试"
+        style="@style/myTextButtonStyle"/>
+
     <EditText
         android:textSize="20dp"
         android:inputType="phone"
